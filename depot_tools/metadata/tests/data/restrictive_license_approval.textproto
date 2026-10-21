@@ -1,0 +1,10 @@
+license_approval {
+  license_path: "LICENSE"
+  id: "Testing-Restrictive-License"
+  bug: 111111111
+}
+license_approval {
+  license_path: "LICENSE"
+  id: "LicenseRef-GUST-Font-License"
+  bug: 987654321
+}

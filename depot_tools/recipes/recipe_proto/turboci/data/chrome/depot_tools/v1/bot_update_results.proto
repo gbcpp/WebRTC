@@ -1,0 +1,35 @@
+// Copyright 2025 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+package turboci.data.chrome.depot_tools.v1;
+
+option go_package = "go.chromium.org/turboci/proto/go/data/chrome/depot_tools/v1;depot_toolspb";
+option java_multiple_files = true;
+
+// BotUpdateResults provides details about all of the repositories that were
+// checked out. bot_update checks out one or more repositories to a common
+// directory, each of which can have have additional repos checked out either
+// via DEPS files or submodules and so on recursively. Any repo in the tree can
+// have its revision overridden.
+message BotUpdateResults {
+  // Information about the commit checked out for a repo (ignoring any patch
+  // applied).
+  message GitCommit {
+    // GoB host without the ".googlesource.com" hostname suffix as the
+    // suffix may be different depending on how it's accessed (eg.
+    // ".git.corp.google.com") while still referring to the same repo.
+    optional string host = 1;
+    // Repository name on the host, e.g. "chromium/src".
+    optional string project = 2;
+    // Commit ID (eg. HEX SHA1).
+    optional string id = 3;
+  }
+
+  // The revision information for all git repos that bot_update checked out. The
+  // key is the path from the common directory where the checkout was performed,
+  // with the value providing information about the repository and revision that
+  // was checked out.
+  map<string, GitCommit> manifest = 1;
+}

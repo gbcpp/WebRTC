@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package chromium.metadata;
+
+// Represents an individual license approval.
+message LicenseApproval {
+  // Path to the license file, relative to this textproto file.
+  string license_path = 1;
+
+  // SPDX identifier, or the ID provided by go/lican/allowlist.
+  string id = 2;
+
+  // Approval bug ID (e.g., "b/1234.." , https://crbug.com/1234..).
+  uint32 bug = 3;
+
+  // Relevant context or limitations for maintainers.
+  string note = 4;
+}
+
+// Root message for restrictive_license_approval.textproto files.
+message RestrictiveLicenseApproval {
+  repeated LicenseApproval license_approval = 1;
+}
